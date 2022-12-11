@@ -1,12 +1,16 @@
 # Slack archive visualizer
-HTML visualizer for JSON Slack archives
+This is a tool that converts JSON [Slack archives](https://slack.com/help/articles/201658943-Export-your-workspace-data) to HTML pages that can be viewed locally with a browser.
+
+![2022-12-12 00_27_18-Greenshot - Copy](https://user-images.githubusercontent.com/78315156/206935341-11319f35-edb0-4f53-b539-55f06f8cb952.png)
 
 ### Requirements
 -   have  **Python**  installed (I tested it on Python 3.10)
 -   have the  **easygui**  module installed (can be done by running  `pip install easygui`  after installing Python)
 
-### How to use
+### How to run
 Run the slack-archive-visualizer.py file. Make sure the working directory is set to that of the .py file, so make sure to `cd` to the correct directory when using command line. Afterwards, all required files can then be found in that directory.
+
+### Features
 
 ### Problems
 I initially wrote this purely for personal use. Because of this, the code is quite messy. Also, I only implemented the features I needed myself. This means that there are some problems I didn't bother fixing.
