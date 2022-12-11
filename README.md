@@ -13,7 +13,7 @@ Run the `slack-archive-visualizer.py` file. Make sure the working directory is s
 ### Features
 As previously stated, all avatars, images and shared files are downloaded and referenced locally. Because of this, the final result is an actual local backup that no longer relies on the availability of Slack's servers to work correctly.
 
-The index page contains a search bar with which all messages in all channels can be searched. Clicking on the timestamp of a message will open up the full message.
+The index page contains a search bar with which all messages in all channels can be searched. Clicking on the timestamp of a message will direct you to the full message.
 
 ![2022-12-12 00_12_15-Index - Test Workspace Slack](https://user-images.githubusercontent.com/78315156/206935529-26da0e39-237e-4343-ad2b-527c61f9c7b7.png)
 
