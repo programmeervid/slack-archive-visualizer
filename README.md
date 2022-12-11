@@ -18,8 +18,6 @@ The index page contains a search bar with which all messages in all channels can
 ![2022-12-12 00_12_15-Index - Test Workspace Slack](https://user-images.githubusercontent.com/78315156/206935529-26da0e39-237e-4343-ad2b-527c61f9c7b7.png)
 
 Aside from that, I tried to keep the functionality as close as possible to that of Slack itself. A (probably incomplete) list of supported features:
--   threads
--   reactions (but not all emojis are supported)
 -   images
 -   shared files
 -   embedded YouTube videos
@@ -32,6 +30,8 @@ Aside from that, I tried to keep the functionality as close as possible to that 
 -   references to people (@person)
 -   references to channels (#channel)
 -   references to messages (#channel/timestamp)
+-   threads
+-   reactions (but not all emojis are supported)
 
 ### Problems
 I initially wrote this purely for personal use. Because of this, the code is quite messy. Also, I only implemented the features I needed myself. This means that there are some problems I didn't bother fixing.
