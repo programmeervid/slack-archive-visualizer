@@ -11,7 +11,8 @@ This is a tool that converts JSON [Slack archives](https://slack.com/help/articl
 Run the slack-archive-visualizer.py file. Make sure the working directory is set to that of the .py file, so make sure to `cd` to the correct directory when using command line. Afterwards, all required files can then be found in that directory.
 
 ### Features
--   The index page contains a search bar with which all messages in all channels can be searched. Clicking on the timestamp of a message will open up the full message. ![2022-12-12 00_12_15-Index - Test Workspace Slack](https://user-images.githubusercontent.com/78315156/206935529-26da0e39-237e-4343-ad2b-527c61f9c7b7.png)
+-   The index page contains a search bar with which all messages in all channels can be searched. Clicking on the timestamp of a message will open up the full message.
+    ![2022-12-12 00_12_15-Index - Test Workspace Slack](https://user-images.githubusercontent.com/78315156/206935529-26da0e39-237e-4343-ad2b-527c61f9c7b7.png)
 -   have the  **easygui**  module installed (can be done by running  `pip install easygui`  after installing Python)
 
 ### Problems
