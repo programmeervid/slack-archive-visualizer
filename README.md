@@ -8,7 +8,7 @@ This is a tool that converts JSON [Slack archives](https://slack.com/help/articl
 -   have the  **easygui**  module installed (can be done by running  `pip install easygui`  after installing Python)
 
 ### How to run
-Run the [slack-archive-visualizer.py](slack-archive-visualizer.py) file. Make sure the working directory is set to that of the .py file, so make sure to `cd` to the correct directory when using command line. Afterwards, all required files can then be found in that directory.
+Run the `slack-archive-visualizer.py` file. Make sure the working directory is set to that of the .py file, so make sure to `cd` to the correct directory when using command line. Afterwards, all required files can then be found in that directory.
 
 ### Features
 As previously stated, all avatars, images and shared files are downloaded and referenced locally. Because of this, the final result is an actual local backup that no longer relies on the availability of Slack's servers to work correctly.
