@@ -4,6 +4,7 @@ This is a tool that converts JSON [Slack archives](https://slack.com/help/articl
 ![2022-12-12 00_27_18-Greenshot - Copy](https://user-images.githubusercontent.com/78315156/206935341-11319f35-edb0-4f53-b539-55f06f8cb952.png)
 
 ### Requirements
+To use this script, you need to:
 -   have  **Python**  installed (tested on Python 3.10.2)
 -   have the  **easygui**  module installed. This can be done by running `pip install easygui==0.98.2` after installing Python (tested on version 0.98.2)
 
