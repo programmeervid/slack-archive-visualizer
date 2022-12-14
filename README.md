@@ -4,8 +4,8 @@ This is a tool that converts JSON [Slack archives](https://slack.com/help/articl
 ![2022-12-12 00_27_18-Greenshot - Copy](https://user-images.githubusercontent.com/78315156/206935341-11319f35-edb0-4f53-b539-55f06f8cb952.png)
 
 ### Requirements
--   have  **Python**  installed (I tested it on Python 3.10)
--   have the  **easygui**  module installed (can be done by running  `pip install easygui`  after installing Python)
+-   have  **Python**  installed (tested on Python 3.10.2)
+-   have the  **easygui**  module installed. This can be done by running `pip install easygui==0.98.2` after installing Python (tested on version 0.98.2)
 
 ### How to run
 Run the `slack-archive-visualizer.py` file. Make sure the working directory is set to that of the .py file, so make sure to `cd` to the correct directory when using command line. Afterwards, all required files can then be found in that directory.
