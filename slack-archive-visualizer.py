@@ -9,21 +9,21 @@ import datetime
 import easygui
 
 def parse_emoji_code(code, alt="", emojis={}):
-    # looks up HTML encoding for the given emoji using the given emojis dictionary
+    """looks up HTML encoding for the given emoji using the given emojis dictionary"""
     res = emojis.get(code, "")
     if not res:
         print("WARNING: unknown emoji code \"" + code + "\"")
     return "".join(list(map(lambda y: (r"&#x" + y + r";") if y else alt.replace("_", "&#95;"), res.split("-"))))
 
 def escape_markup_chars(string, escape_url_chars=False):
-    # removes markup characters from the given string
+    """removes markup characters from the given string"""
     if escape_url_chars:
         return string.replace(r"_", r"&#95;").replace(r"~", r"&#126;").replace(r"*", r"&#42").replace(r".", r"&#46;").replace(r"&gt;", r"&#62;")
     else:
         return string.replace(r"_", r"&#95;").replace(r"~", r"&#126;").replace(r"*", r"&#42")
 
 def get_list_style_type(marker, level):
-    # determines the style of the list based on the marker and the level (indentation)
+    """determines the style of the list based on the marker and the level (indentation)"""
     if re.match(r"[0-9a-zA-Z]", marker):
         if level in [0, 3]:
             return r"style='list-style-type: decimal;'"
@@ -46,7 +46,7 @@ def get_list_style_type(marker, level):
         return r""
 
 def get_html_list(text):
-    # converts text to HTML list segment, where each line in the text is a separate <li> element
+    """converts text to HTML list segment, where each line in the text is a separate <li> element"""
     lines = text.split("\n")
     indentations = list(map(lambda x: int(x.find(re.search(r" *(.*)", x).group(1))/4), text.split("\n")))
     content = r"</p><ul class=message-list-outer>"
@@ -60,7 +60,7 @@ def get_html_list(text):
     return content
 
 def parse_markup(text, users, channel_names, emojis={}):
-    # converts source text to HTML text by interpreting markdown, emojis and references like @'s and #'s
+    """converts source text to HTML text by interpreting markdown, emojis and references like @'s and #'s"""
     text = re.sub(r"(:([a-z_\+\-][a-z0-9_\+\-]*):)", lambda x: parse_emoji_code(x.group(2), alt=x.group(1), emojis=emojis), text)
     text = re.sub(r"<@([a-zA-Z0-9]*)>", lambda x: escape_markup_chars(r"<b class=reference-personal>@"+users.get(x.group(1), {}).get("name", "")+r"</b>"), text)
     text = re.sub(r"<#([a-zA-Z0-9]*)[|]([^<|>:/]*)>", lambda x: escape_markup_chars(r"<a href=" + x.group(2) + r".html><b class=reference-message>#" + x.group(2) + r"</b></a>", escape_url_chars=True), text)
@@ -82,7 +82,7 @@ def parse_markup(text, users, channel_names, emojis={}):
     return text
 
 def strip_markup(text, users, channel_names, emojis={}):
-    # strips markup from text (for search on index page)
+    """strips markup from text (for search on index page)"""
     text = re.sub(r"(:([a-z_\+\-][a-z0-9_\+\-]*):)", lambda x: parse_emoji_code(x.group(2), alt=x.group(1), emojis=emojis), text)
     text = re.sub(r"<@([a-zA-Z0-9]*)>", lambda x: escape_markup_chars(r"@"+users.get(x.group(1), {}).get("name", "")), text)
     text = re.sub(r"<#([a-zA-Z0-9]*)[|]([^<|>:/]*)>", lambda x: escape_markup_chars(r"#" + x.group(2)), text)
@@ -98,7 +98,7 @@ def strip_markup(text, users, channel_names, emojis={}):
     return text
 
 def get_html_head(title, subtitle, is_index=False):
-    # generates HTML head
+    """generates HTML head"""
     content = "<!DOCTYPE html>\n<html lang=\"en\">\n\t<head>\n\t\t<meta charset=\"utf-8\">\n\t\t<title>"
     content += subtitle + " - " + title
     content += "</title>\n\t\t<link rel=\"icon\" type=\"image/x-icon\" href=\""
@@ -123,7 +123,7 @@ def get_html_head(title, subtitle, is_index=False):
     return content
 
 def get_html_body(title, sidebar_content, messages_content, is_index=False):
-    # generates HTML body
+    """generates HTML body"""
     if is_index:
         content = "\t<body>\n"
     else:
@@ -157,7 +157,7 @@ def get_html_body(title, sidebar_content, messages_content, is_index=False):
     return content
 
 def get_html_sidebar(channels, current_channel="", is_index=False):
-    # generates HTML sidebar
+    """generates HTML sidebar"""
     content = ""
     for c in channels:
         content += "\t\t\t\t\t<li class=\"channel"
@@ -172,7 +172,7 @@ def get_html_sidebar(channels, current_channel="", is_index=False):
     return content
 
 def get_html_files(files):
-    # generates HTML for shared files inside a message
+    """generates HTML for shared files inside a message"""
     content = ""
     for f in files:
         name = mimetype = f.get("name", "")
@@ -198,7 +198,7 @@ def get_html_files(files):
     return content
 
 def get_html_replies(replies, users, channel_names, emojis={}):
-    # generates HTML for the replies under a message (thread)
+    """generates HTML for the replies under a message (thread)"""
     content = "\t\t\t\t\t<div class=\"message-thread-container\">\n"
     content += "\t\t\t\t\t\t<div class=\"message-thread\">\n"
     for m in replies:
@@ -217,7 +217,7 @@ def get_html_replies(replies, users, channel_names, emojis={}):
     return content
 
 def get_html_reactions(reactions, emojis={}):
-    # generates HTML for the reactions on a message
+    """generates HTML for the reactions on a message"""
     content = "\t\t\t\t\t<div class=\"message-reactions\">\n"
     for r in reactions:
         name = r.get("name", "")
@@ -230,7 +230,7 @@ def get_html_reactions(reactions, emojis={}):
     return content
 
 def get_html_message(messageid, timestamp, username, avatar, msg_content, users, channel_names, channel_name="", replies=[], files=[], reactions=[], subtype="", search_result=False, emojis={}):
-    # generates HTML for a message
+    """generates HTML for a message"""
     if search_result:
         stripped_message = strip_markup(msg_content, users, channel_names, emojis=emojis)
         if not stripped_message:
@@ -276,7 +276,7 @@ def get_html_message(messageid, timestamp, username, avatar, msg_content, users,
     return content
 
 def get_html_messages(messages, users, channel_names, search_result=False, emojis={}):
-    # generates HTML for all messages
+    """generates HTML for all messages"""
     content = ""
     for m in messages:
         messageid = m.get("ts", "0").replace(".", "")
@@ -294,7 +294,7 @@ def get_html_messages(messages, users, channel_names, search_result=False, emoji
     return content
 
 def write_html(workspace_title, current_channel, msg_data, channels, dst, users, channel_names, emojis={}):
-    # generates HTML for the content pages and writes it to file
+    """generates HTML for the content pages and writes it to file"""
     f = open(dst, "w", encoding="utf-8")
     header = get_html_head(workspace_title, current_channel)
     sidebar = get_html_sidebar(channels, current_channel)
@@ -305,7 +305,7 @@ def write_html(workspace_title, current_channel, msg_data, channels, dst, users,
     f.close()
 
 def write_index_html(dst, channels, users, workspace_title, channel_names, subtitle="", complete_msg_data=[], emojis={}):
-    # generates HTML for the index page and writes it to file
+    """generates HTML for the index page and writes it to file"""
     f = open(dst, "w", encoding="utf-8")
     header = get_html_head(workspace_title, "Index", is_index=True)
     sidebar = get_html_sidebar(channels, is_index=True)
@@ -322,7 +322,7 @@ def write_index_html(dst, channels, users, workspace_title, channel_names, subti
     f.close()
 
 def read_chat_files(dir):
-    # read all chat files and return list of JSON contents
+    """read all chat files and return list of JSON contents"""
     dir_contents = list(map(lambda x: join(dir, x), listdir(dir)))
     files = [x for x in dir_contents if isfile(x) and splitext(x)[1] == ".json"]
     data = []
